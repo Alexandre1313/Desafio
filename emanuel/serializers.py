@@ -8,13 +8,13 @@ class GabSerializer(serializers.ModelSerializer):
         fields = ('id',
                   'nome_materia',
                   'questao_1', 'opcao_1_1', 'opcao_1_2', 'opcao_1_3', 'resposta_da_questao_1',
-                  'peso_da_questao_1',
+                  # 'peso_da_questao_1',
                   'questao_2', 'opcao_2_1', 'opcao_2_2', 'opcao_2_3', 'resposta_da_questao_2',
-                  'peso_da_questao_2',
+                  # 'peso_da_questao_2',
                   'questao_3', 'opcao_3_1', 'opcao_3_2', 'opcao_3_3', 'resposta_da_questao_3',
-                  'peso_da_questao_3',
+                  # 'peso_da_questao_3',
                   'questao_4', 'opcao_4_1', 'opcao_4_2', 'opcao_4_3', 'resposta_da_questao_4',
-                  'peso_da_questao_4',
+                  # 'peso_da_questao_4',
                   'criacao')
 
 
