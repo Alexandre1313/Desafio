@@ -20,8 +20,8 @@ class GabAdmin(admin.ModelAdmin):
 @admin.register(ProvaAluno)
 class ProvaAlunoAdmin(admin.ModelAdmin):
     list_display = ('id',
-                    'nome_do_aluno',
-                    'nome_materia',
+                    'aluno',
+                    'prova',
                     'resposta_do_aluno_questao_1',
                     'resposta_do_aluno_questao_2',
                     'resposta_do_aluno_questao_3',

@@ -56,19 +56,19 @@ class Gab(Base):
 
 
 class ProvaAluno(Base):
-    nome_do_aluno = models.ForeignKey(Aluno, related_name='Provas', on_delete=models.CASCADE)
-    nome_materia = models.ForeignKey(Gab, related_name='Matérias', on_delete=models.CASCADE)
-    resposta_do_aluno_questao_1 = models.CharField(max_length=1)
-    resposta_do_aluno_questao_2 = models.CharField(max_length=1)
-    resposta_do_aluno_questao_3 = models.CharField(max_length=1)
-    resposta_do_aluno_questao_4 = models.CharField(max_length=1)
+    aluno = models.ForeignKey(Aluno, related_name='Provas', on_delete=models.CASCADE)
+    prova = models.ForeignKey(Gab, related_name='Matérias', on_delete=models.CASCADE)
+    resposta_do_aluno_questao_1 = models.CharField('Resposta 1ª', max_length=1)
+    resposta_do_aluno_questao_2 = models.CharField('Resposta 2ª', max_length=1)
+    resposta_do_aluno_questao_3 = models.CharField('Resposta 3ª', max_length=1)
+    resposta_do_aluno_questao_4 = models.CharField('Resposta 4ª', max_length=1)
 
     class Meta:
         verbose_name = 'resposta'
         verbose_name_plural = 'respostas'
 
     def __str__(self):
-        return self.nome_do_aluno
+        return self.aluno
 
 
 class Sit(Base):
