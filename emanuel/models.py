@@ -44,7 +44,7 @@ class Gab(Base):
     opcao_4_1 = models.CharField('a', max_length=100)
     opcao_4_2 = models.CharField('b', max_length=100)
     opcao_4_3 = models.CharField('c', max_length=100)
-    resposta_da_questao_4 = models.CharField('reaposta', max_length=1)
+    resposta_da_questao_4 = models.CharField('resposta', max_length=1)
     peso_da_questao_4 = models.IntegerField(default=2)
 
     class Meta:
@@ -56,16 +56,16 @@ class Gab(Base):
 
 
 class ProvaAluno(Base):
-    aluno = models.ForeignKey(Aluno, related_name='Provas', on_delete=models.CASCADE)
-    prova = models.ForeignKey(Gab, related_name='Matérias', on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno, related_name='aluno', on_delete=models.CASCADE)
+    prova = models.ForeignKey(Gab, related_name='materias', on_delete=models.CASCADE)
     resposta_do_aluno_questao_1 = models.CharField('Resposta 1ª', max_length=1)
     resposta_do_aluno_questao_2 = models.CharField('Resposta 2ª', max_length=1)
     resposta_do_aluno_questao_3 = models.CharField('Resposta 3ª', max_length=1)
     resposta_do_aluno_questao_4 = models.CharField('Resposta 4ª', max_length=1)
 
     class Meta:
-        verbose_name = 'resposta'
-        verbose_name_plural = 'respostas'
+        verbose_name = 'prova'
+        verbose_name_plural = 'provas'
 
     def __str__(self):
         return self.aluno
@@ -82,8 +82,8 @@ class Sit(Base):
     situacao = models.CharField(max_length=25)
 
     class Meta:
-        verbose_name = 'Situacao'
-        verbose_name_plural = 'Situacoes'
+        verbose_name = 'situacao'
+        verbose_name_plural = 'situacoes'
 
     def __str__(self):
         return self.nome_do_aluno

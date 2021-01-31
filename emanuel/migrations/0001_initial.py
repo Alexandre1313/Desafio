@@ -89,8 +89,10 @@ class Migration(migrations.Migration):
                 ('resposta_do_aluno_questao_2', models.CharField(max_length=1)),
                 ('resposta_do_aluno_questao_3', models.CharField(max_length=1)),
                 ('resposta_do_aluno_questao_4', models.CharField(max_length=1)),
-                ('nome_do_aluno', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Provas', to='emanuel.Aluno')),
-                ('nome_materia', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Matérias', to='emanuel.Gab')),
+                ('nome_do_aluno', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Provas',
+                                                    to='emanuel.Aluno')),
+                ('nome_materia', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Matérias',
+                                                   to='emanuel.Gab')),
             ],
             options={
                 'verbose_name': 'resposta',

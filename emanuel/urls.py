@@ -1,15 +1,23 @@
 from django.urls import path
+from rest_framework.routers import SimpleRouter
 from .views import GabAPIView, ProvaAlunoAPIView, \
     AlunoAPIView, GabsAPIView, ProvasAlunoAPIView, AlunosAPIView, \
-    SitAPIView, SitsAPIView
+    SitAPIView, SitsAPIView, GabaritoViewSet, ProvaViewSet, AlunoViewSet, SituacaoViewSet
+
+router = SimpleRouter()
+router.register('gabarito', GabaritoViewSet)
+router.register('prova', ProvaViewSet)
+router.register('aluno', AlunoViewSet)
+router.register('situacao', SituacaoViewSet)
+
 
 urlpatterns = [
-    path('gab/', GabsAPIView.as_view(), name='Gabaritos'),
-    path('provaaluno/', ProvasAlunoAPIView.as_view(), name='Respostas'),
-    path('aluno/', AlunosAPIView.as_view(), name='Alunos'),
-    path('sit/', SitsAPIView.as_view(), name='Situacoes'),
-    path('gab/<int:pk>/', GabAPIView.as_view(), name='Gabarito'),
-    path('provaaluno/<int:pk>/', ProvaAlunoAPIView.as_view(), name='Resposta'),
-    path('aluno/<int:pk>/', AlunoAPIView.as_view(), name='Aluno'),
-    path('sit/<int:pk>/', SitAPIView.as_view(), name='Situacao'),
+    path('gabaritos/', GabsAPIView.as_view(), name='gabaritos'),
+    path('provas/', ProvasAlunoAPIView.as_view(), name='provas'),
+    path('alunos/', AlunosAPIView.as_view(), name='alunos'),
+    path('situacoes/', SitsAPIView.as_view(), name='situacoes'),
+    path('gabaritos/<int:pk>/', GabAPIView.as_view(), name='gabarito'),
+    path('provas/<int:pk>/', ProvaAlunoAPIView.as_view(), name='prova'),
+    path('alunos/<int:pk>/', AlunoAPIView.as_view(), name='aluno'),
+    path('situacoes/<int:pk>/', SitAPIView.as_view(), name='situacao'),
     ]
