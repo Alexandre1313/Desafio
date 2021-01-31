@@ -2,9 +2,11 @@ from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework import mixins
 from .models import Gabarito, Prova, Aluno, Situacao
-from .serializers import GabaritoSerializer, ProvaSerializer,\
+from .serializers import GabaritoSerializer, ProvaSerializer, \
     AlunoSerializer, SituacaoSerializer
+
 
 # API v1
 
@@ -48,6 +50,7 @@ class SituacaoAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Situacao.objects.all()
     serializer_class = SituacaoSerializer
 
+
 # API v2
 
 
@@ -75,3 +78,9 @@ class AlunosViewSet(viewsets.ModelViewSet):
 class SituacoesViewSet(viewsets.ModelViewSet):
     queryset = Situacao.objects.all()
     serializer_class = SituacaoSerializer
+
+
+class CadastroGab(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin,
+                  viewsets.GenericViewSet):
+    queryset = Gabarito.objects.all()
+    serializer_class = GabaritoSerializer

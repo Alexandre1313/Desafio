@@ -1,15 +1,17 @@
 from django.urls import path
 from rest_framework.routers import SimpleRouter
+
 from .views import GabaritoAPIView, ProvaAPIView, \
     AlunoAPIView, GabaritosAPIView, ProvasAPIView, AlunosAPIView, \
-    SituacaoAPIView, SituacoesAPIView, GabaritosViewSet, ProvasViewSet, AlunosViewSet, SituacoesViewSet
+    SituacaoAPIView, SituacoesAPIView, GabaritosViewSet, ProvasViewSet,\
+    AlunosViewSet, SituacoesViewSet, CadastroGab
 
 router = SimpleRouter()
 router.register('gabarito', GabaritosViewSet)
 router.register('prova', ProvasViewSet)
 router.register('aluno', AlunosViewSet)
 router.register('situacao', SituacoesViewSet)
-
+router.register('cadastrogab', CadastroGab)
 
 urlpatterns = [
     path('gabaritos/', GabaritosAPIView.as_view(), name='gabaritos'),
