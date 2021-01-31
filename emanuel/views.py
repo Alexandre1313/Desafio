@@ -1,30 +1,32 @@
 from rest_framework import generics
 from rest_framework import viewsets
-from .models import Gab, ProvaAluno, Aluno, Sit
-from .serializers import GabSerializer, ProvaAlunoSerializer,\
-    AlunoSerializer, SitSerializer
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from .models import Gabarito, Prova, Aluno, Situacao
+from .serializers import GabaritoSerializer, ProvaSerializer,\
+    AlunoSerializer, SituacaoSerializer
 
 # API v1
 
 
-class GabsAPIView(generics.ListCreateAPIView):
-    queryset = Gab.objects.all()
-    serializer_class = GabSerializer
+class GabaritosAPIView(generics.ListCreateAPIView):
+    queryset = Gabarito.objects.all()
+    serializer_class = GabaritoSerializer
 
 
-class GabAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Gab.objects.all()
-    serializer_class = GabSerializer
+class GabaritoAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Gabarito.objects.all()
+    serializer_class = GabaritoSerializer
 
 
-class ProvasAlunoAPIView(generics.ListCreateAPIView):
-    queryset = ProvaAluno.objects.all()
-    serializer_class = ProvaAlunoSerializer
+class ProvasAPIView(generics.ListCreateAPIView):
+    queryset = Prova.objects.all()
+    serializer_class = ProvaSerializer
 
 
-class ProvaAlunoAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = ProvaAluno.objects.all()
-    serializer_class = ProvaAlunoSerializer
+class ProvaAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Prova.objects.all()
+    serializer_class = ProvaSerializer
 
 
 class AlunosAPIView(generics.ListCreateAPIView):
@@ -37,33 +39,39 @@ class AlunoAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AlunoSerializer
 
 
-class SitsAPIView(generics.ListCreateAPIView):
-    queryset = Sit.objects.all()
-    serializer_class = SitSerializer
+class SituacoesAPIView(generics.ListCreateAPIView):
+    queryset = Situacao.objects.all()
+    serializer_class = SituacaoSerializer
 
 
-class SitAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Sit.objects.all()
-    serializer_class = SitSerializer
+class SituacaoAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Situacao.objects.all()
+    serializer_class = SituacaoSerializer
 
 # API v2
 
 
-class GabaritoViewSet(viewsets.ModelViewSet):
-    queryset = Gab.objects.all()
-    serializer_class = GabSerializer
+class GabaritosViewSet(viewsets.ModelViewSet):
+    queryset = Gabarito.objects.all()
+    serializer_class = GabaritoSerializer
 
 
-class ProvaViewSet(viewsets.ModelViewSet):
-    queryset = ProvaAluno.objects.all()
-    serializer_class = ProvaAlunoSerializer
+class ProvasViewSet(viewsets.ModelViewSet):
+    queryset = Prova.objects.all()
+    serializer_class = ProvaSerializer
 
 
-class AlunoViewSet(viewsets.ModelViewSet):
+class AlunosViewSet(viewsets.ModelViewSet):
     queryset = Aluno.objects.all()
     serializer_class = AlunoSerializer
 
+    @action(detail=True, methods=['Get'])
+    def provas(self, request, pk=None):
+        aluno = self.get_object()
+        serializer = ProvaSerializer(aluno.provas.all(), many=True)
+        return Response(serializer.data)
 
-class SituacaoViewSet(viewsets.ModelViewSet):
-    queryset = Sit.objects.all()
-    serializer_class = SitSerializer
+
+class SituacoesViewSet(viewsets.ModelViewSet):
+    queryset = Situacao.objects.all()
+    serializer_class = SituacaoSerializer

@@ -10,17 +10,17 @@ class Base(models.Model):
 
 class Aluno(Base):
     matricula_do_aluno = models.IntegerField(unique=True)
-    nome_do_aluno = models.CharField(max_length=55)
+    aluno = models.CharField(max_length=55)
 
     class Meta:
         verbose_name = 'aluno'
         verbose_name_plural = 'alunos'
 
     def __str__(self):
-        return self.nome_do_aluno
+        return self.aluno
 
 
-class Gab(Base):
+class Gabarito(Base):
     nome_materia = models.CharField('Disciplina', max_length=55, unique=True)
     questao_1 = models.CharField('Questão 1', max_length=100)
     opcao_1_1 = models.CharField('a', max_length=100)
@@ -55,9 +55,9 @@ class Gab(Base):
         return self.nome_materia
 
 
-class ProvaAluno(Base):
-    aluno = models.ForeignKey(Aluno, related_name='aluno', on_delete=models.CASCADE)
-    prova = models.ForeignKey(Gab, related_name='materias', on_delete=models.CASCADE)
+class Prova(Base):
+    aluno = models.ForeignKey(Aluno, related_name='provas', on_delete=models.CASCADE)
+    provas = models.ForeignKey(Gabarito, related_name='gabaritos', on_delete=models.CASCADE)
     resposta_do_aluno_questao_1 = models.CharField('Resposta 1ª', max_length=1)
     resposta_do_aluno_questao_2 = models.CharField('Resposta 2ª', max_length=1)
     resposta_do_aluno_questao_3 = models.CharField('Resposta 3ª', max_length=1)
@@ -71,8 +71,8 @@ class ProvaAluno(Base):
         return self.aluno
 
 
-class Sit(Base):
-    nome_do_aluno = models.CharField(max_length=55)
+class Situacao(Base):
+    aluno = models.CharField(max_length=55)
     nome_da_materia = models.CharField(max_length=55)
     nota_da_prova_1 = models.DecimalField(max_digits=2, decimal_places=True)
     nota_da_prova_2 = models.DecimalField(max_digits=2, decimal_places=True)
@@ -86,4 +86,4 @@ class Sit(Base):
         verbose_name_plural = 'situacoes'
 
     def __str__(self):
-        return self.nome_do_aluno
+        return self.aluno

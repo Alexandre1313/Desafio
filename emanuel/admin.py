@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Gab, ProvaAluno, Aluno, Sit
+from .models import Gabarito, Prova, Aluno, Situacao
 
 
-@admin.register(Gab)
-class GabAdmin(admin.ModelAdmin):
+@admin.register(Gabarito)
+class GabaritoAdmin(admin.ModelAdmin):
     list_display = ('id',
                     'nome_materia',
                     'questao_1', 'opcao_1_1', 'opcao_1_2', 'opcao_1_3', 'resposta_da_questao_1',
@@ -17,11 +17,11 @@ class GabAdmin(admin.ModelAdmin):
                     'criacao')
 
 
-@admin.register(ProvaAluno)
-class ProvaAlunoAdmin(admin.ModelAdmin):
+@admin.register(Prova)
+class ProvaAdmin(admin.ModelAdmin):
     list_display = ('id',
                     'aluno',
-                    'prova',
+                    'provas',
                     'resposta_do_aluno_questao_1',
                     'resposta_do_aluno_questao_2',
                     'resposta_do_aluno_questao_3',
@@ -30,14 +30,14 @@ class ProvaAlunoAdmin(admin.ModelAdmin):
 
 @admin.register(Aluno)
 class AlunoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'matricula_do_aluno', 'nome_do_aluno')
+    list_display = ('id', 'matricula_do_aluno', 'aluno')
 
 
-@admin.register(Sit)
-class SitAdmin(admin.ModelAdmin):
+@admin.register(Situacao)
+class SituacaoAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'nome_do_aluno', 'nome_da_materia',
+        'aluno', 'nome_da_materia',
         'nota_da_prova_1', 'nota_da_prova_2', 'nota_da_prova_3',
         'nota_da_prova_4', 'media_final', 'situacao'
     )
