@@ -5,7 +5,7 @@ from .models import Gabarito, Prova, Aluno, Situacao
 @admin.register(Gabarito)
 class GabaritoAdmin(admin.ModelAdmin):
     list_display = ('id',
-                    'nome_materia',
+                    'gabarito',
                     'questao_1', 'opcao_1_1', 'opcao_1_2', 'opcao_1_3', 'resposta_da_questao_1',
                     'peso_da_questao_1',
                     'questao_2', 'opcao_2_1', 'opcao_2_2', 'opcao_2_3', 'resposta_da_questao_2',
@@ -21,7 +21,7 @@ class GabaritoAdmin(admin.ModelAdmin):
 class ProvaAdmin(admin.ModelAdmin):
     list_display = ('id',
                     'aluno',
-                    'provas',
+                    'prova',
                     'resposta_do_aluno_questao_1',
                     'resposta_do_aluno_questao_2',
                     'resposta_do_aluno_questao_3',
@@ -37,7 +37,7 @@ class AlunoAdmin(admin.ModelAdmin):
 class SituacaoAdmin(admin.ModelAdmin):
     list_display = (
         'id',
-        'aluno', 'nome_da_materia',
-        'nota_da_prova_1', 'nota_da_prova_2', 'nota_da_prova_3',
-        'nota_da_prova_4', 'media_final', 'situacao'
+        'aluno',
+        'curso',
+        'media_final', 'situacao'
     )

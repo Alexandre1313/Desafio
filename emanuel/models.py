@@ -21,7 +21,7 @@ class Aluno(Base):
 
 
 class Gabarito(Base):
-    nome_materia = models.CharField('Disciplina', max_length=55, unique=True)
+    gabarito = models.CharField('Disciplina', max_length=55, unique=True)
     questao_1 = models.CharField('Questão 1', max_length=100)
     opcao_1_1 = models.CharField('a', max_length=100)
     opcao_1_2 = models.CharField('b', max_length=100)
@@ -52,12 +52,12 @@ class Gabarito(Base):
         verbose_name_plural = 'gabaritos'
 
     def __str__(self):
-        return self.nome_materia
+        return self.gabarito
 
 
 class Prova(Base):
     aluno = models.ForeignKey(Aluno, related_name='provas', on_delete=models.CASCADE)
-    provas = models.ForeignKey(Gabarito, related_name='gabaritos', on_delete=models.CASCADE)
+    prova = models.ForeignKey(Gabarito, related_name='gabaritos', on_delete=models.CASCADE)
     resposta_do_aluno_questao_1 = models.CharField('Resposta 1ª', max_length=1)
     resposta_do_aluno_questao_2 = models.CharField('Resposta 2ª', max_length=1)
     resposta_do_aluno_questao_3 = models.CharField('Resposta 3ª', max_length=1)
@@ -72,12 +72,8 @@ class Prova(Base):
 
 
 class Situacao(Base):
-    aluno = models.CharField(max_length=55)
-    nome_da_materia = models.CharField(max_length=55)
-    nota_da_prova_1 = models.DecimalField(max_digits=2, decimal_places=True)
-    nota_da_prova_2 = models.DecimalField(max_digits=2, decimal_places=True)
-    nota_da_prova_3 = models.DecimalField(max_digits=2, decimal_places=True)
-    nota_da_prova_4 = models.DecimalField(max_digits=2, decimal_places=True)
+    aluno = models.ForeignKey(Aluno, max_length=55, related_name='situacoes', on_delete=models.CASCADE)
+    curso = models.CharField(blank=True, max_length=55)
     media_final = models.DecimalField(max_digits=2, decimal_places=True)
     situacao = models.CharField(max_length=25)
 

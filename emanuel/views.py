@@ -4,8 +4,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import mixins
 from .models import Gabarito, Prova, Aluno, Situacao
-from .serializers import GabaritoSerializer, ProvaSerializer, \
-    AlunoSerializer, SituacaoSerializer
+from .serializers import GabaritoSerializer, ProvaSerializerGab, \
+    AlunoSerializer, SituacaoSerializer, ProvaSerializer
 
 
 # API v1
@@ -84,3 +84,8 @@ class CadastroGab(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.Destr
                   viewsets.GenericViewSet):
     queryset = Gabarito.objects.all()
     serializer_class = GabaritoSerializer
+
+
+class ProvasViewSetGab(viewsets.ModelViewSet):
+    queryset = Prova.objects.all()
+    serializer_class = ProvaSerializerGab

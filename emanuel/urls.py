@@ -4,7 +4,7 @@ from rest_framework.routers import SimpleRouter
 from .views import GabaritoAPIView, ProvaAPIView, \
     AlunoAPIView, GabaritosAPIView, ProvasAPIView, AlunosAPIView, \
     SituacaoAPIView, SituacoesAPIView, GabaritosViewSet, ProvasViewSet,\
-    AlunosViewSet, SituacoesViewSet, CadastroGab
+    AlunosViewSet, SituacoesViewSet, CadastroGab, ProvasViewSetGab
 
 router = SimpleRouter()
 router.register('gabarito', GabaritosViewSet)
@@ -12,6 +12,7 @@ router.register('prova', ProvasViewSet)
 router.register('aluno', AlunosViewSet)
 router.register('situacao', SituacoesViewSet)
 router.register('cadastrogab', CadastroGab)
+router.register('provasgab', ProvasViewSetGab)
 
 urlpatterns = [
     path('gabaritos/', GabaritosAPIView.as_view(), name='gabaritos'),

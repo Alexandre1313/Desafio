@@ -2,11 +2,21 @@ from rest_framework import serializers
 from .models import Gabarito, Prova, Aluno, Situacao
 
 
+class GabaritoSerializerGab(serializers.ModelSerializer):
+    class Meta:
+        model = Gabarito
+        fields = ('id', 'gabarito',
+                  'resposta_da_questao_1',
+                  'resposta_da_questao_2',
+                  'resposta_da_questao_3',
+                  'resposta_da_questao_4')
+
+
 class GabaritoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gabarito
         fields = ('id',
-                  'nome_materia',
+                  'gabarito',
                   'questao_1', 'opcao_1_1', 'opcao_1_2', 'opcao_1_3', 'resposta_da_questao_1',
                   # 'peso_da_questao_1',
                   'questao_2', 'opcao_2_1', 'opcao_2_2', 'opcao_2_3', 'resposta_da_questao_2',
@@ -18,25 +28,29 @@ class GabaritoSerializer(serializers.ModelSerializer):
                   'criacao')
 
 
-class ProvaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Prova
-        fields = ('id',
-                  'aluno',
-                  'provas',
-                  'resposta_do_aluno_questao_1',
-                  'resposta_do_aluno_questao_2',
-                  'resposta_do_aluno_questao_3',
-                  'resposta_do_aluno_questao_4'
-                  )
-
-
 class AlunoSerializer(serializers.ModelSerializer):
+    provas = serializers.HyperlinkedRelatedField(read_only=True, many=True, view_name='prova-detail')
+
     class Meta:
         model = Aluno
         fields = ('id',
                   'matricula_do_aluno',
-                  'aluno')
+                  'aluno', 'provas')
+
+
+class ProvaSerializerGab(serializers.ModelSerializer):
+    prova = GabaritoSerializerGab(read_only=True)
+
+    class Meta:
+        model = Prova
+        fields = ('id',
+                  'aluno',
+                  'prova',
+                  'resposta_do_aluno_questao_1',
+                  'resposta_do_aluno_questao_2',
+                  'resposta_do_aluno_questao_3',
+                  'resposta_do_aluno_questao_4',
+                  'prova')
 
 
 class SituacaoSerializer(serializers.ModelSerializer):
@@ -44,7 +58,21 @@ class SituacaoSerializer(serializers.ModelSerializer):
         model = Situacao
         fields = (
             'id',
-            'aluno', 'nome_da_materia',
-            'nota_da_prova_1', 'nota_da_prova_2', 'nota_da_prova_3',
-            'nota_da_prova_4', 'media_final', 'situacao'
+            'aluno',
+            'curso',
+            'media_final', 'situacao'
         )
+
+
+class ProvaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Prova
+        fields = ('id',
+                  'aluno',
+                  'prova',
+                  'resposta_do_aluno_questao_1',
+                  'resposta_do_aluno_questao_2',
+                  'resposta_do_aluno_questao_3',
+                  'resposta_do_aluno_questao_4',
+                  )
