@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import mixins
+from rest_framework import permissions
 from .models import Gabarito, Prova, Aluno, Situacao
 from .serializers import GabaritoSerializer, ProvaSerializerGab, \
     AlunoSerializer, SituacaoSerializer, ProvaSerializer
@@ -60,6 +61,7 @@ class GabaritosViewSet(viewsets.ModelViewSet):
 
 
 class ProvasViewSet(viewsets.ModelViewSet):
+    # permission_classes = (permissions.DjangoModelPermissions, )
     queryset = Prova.objects.all()
     serializer_class = ProvaSerializer
 
@@ -70,8 +72,14 @@ class AlunosViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['Get'])
     def provas(self, request, pk=None):
-        aluno = self.get_object()
-        serializer = ProvaSerializer(aluno.provas.all(), many=True)
+        self.pagination_class.page_size = 5
+        provas = Prova.objects.filter(aluno_id=pk)
+        page = self.paginate_queryset(provas)
+        if page is not None:
+            serializer = ProvaSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = ProvaSerializer(provas, many=True)
         return Response(serializer.data)
 
 
@@ -86,6 +94,6 @@ class CadastroGab(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.Destr
     serializer_class = GabaritoSerializer
 
 
-class ProvasViewSetGab(viewsets.ModelViewSet):
+class ProvasViewSetGab(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Prova.objects.all()
     serializer_class = ProvaSerializerGab

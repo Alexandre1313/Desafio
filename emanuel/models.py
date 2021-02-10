@@ -15,6 +15,7 @@ class Aluno(Base):
     class Meta:
         verbose_name = 'aluno'
         verbose_name_plural = 'alunos'
+        ordering = 'id',
 
     def __str__(self):
         return self.aluno
@@ -50,6 +51,7 @@ class Gabarito(Base):
     class Meta:
         verbose_name = 'gabarito'
         verbose_name_plural = 'gabaritos'
+        ordering = 'id',
 
     def __str__(self):
         return self.gabarito
@@ -66,6 +68,7 @@ class Prova(Base):
     class Meta:
         verbose_name = 'prova'
         verbose_name_plural = 'provas'
+        ordering = 'aluno',
 
     def __str__(self):
         return self.aluno
@@ -80,6 +83,7 @@ class Situacao(Base):
     class Meta:
         verbose_name = 'situacao'
         verbose_name_plural = 'situacoes'
+        ordering = 'id',
 
     def __str__(self):
         return self.aluno

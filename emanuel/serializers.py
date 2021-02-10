@@ -2,7 +2,11 @@ from rest_framework import serializers
 from .models import Gabarito, Prova, Aluno, Situacao
 
 
-class GabaritoSerializerGab(serializers.ModelSerializer):
+class Base1(serializers.ModelSerializer):
+    pass
+
+
+class GabaritoSerializerGab(Base1):
     class Meta:
         model = Gabarito
         fields = ('id', 'gabarito',
@@ -26,6 +30,26 @@ class GabaritoSerializer(serializers.ModelSerializer):
                   'questao_4', 'opcao_4_1', 'opcao_4_2', 'opcao_4_3', 'resposta_da_questao_4',
                   # 'peso_da_questao_4',
                   'criacao')
+
+    def validate_resposta_da_questao_1(self, valor):
+        if valor in 'AaBbCc':
+            return valor
+        raise serializers.ValidationError('A resposta só pode ser A, B ou C')
+
+    def validate_resposta_da_questao_2(self, valor):
+        if valor in 'AaBbCc':
+            return valor
+        raise serializers.ValidationError('A resposta só pode ser A, B ou C')
+
+    def validate_resposta_da_questao_3(self, valor):
+        if valor in 'AaBbCc':
+            return valor
+        raise serializers.ValidationError('A resposta só pode ser A, B ou C')
+
+    def validate_resposta_da_questao_4(self, valor):
+        if valor in 'AaBbCc':
+            return valor
+        raise serializers.ValidationError('A resposta só pode ser A, B ou C')
 
 
 class AlunoSerializer(serializers.ModelSerializer):
@@ -65,7 +89,6 @@ class SituacaoSerializer(serializers.ModelSerializer):
 
 
 class ProvaSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Prova
         fields = ('id',
@@ -76,3 +99,23 @@ class ProvaSerializer(serializers.ModelSerializer):
                   'resposta_do_aluno_questao_3',
                   'resposta_do_aluno_questao_4',
                   )
+
+    def validate_resposta_do_aluno_questao_1(self, valor):
+        if valor in 'AaBbCc':
+            return valor
+        raise serializers.ValidationError('A resposta só pode ser A, B ou C')
+
+    def validate_resposta_do_aluno_questao_2(self, valor):
+        if valor in 'AaBbCc':
+            return valor
+        raise serializers.ValidationError('A resposta só pode ser A, B ou C')
+
+    def validate_resposta_do_aluno_questao_3(self, valor):
+        if valor in 'AaBbCc':
+            return valor
+        raise serializers.ValidationError('A resposta só pode ser A, B ou C')
+
+    def validate_resposta_do_aluno_questao_4(self, valor):
+        if valor in 'AaBbCc':
+            return valor
+        raise serializers.ValidationError('A resposta só pode ser A, B ou C')
