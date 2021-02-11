@@ -1,4 +1,5 @@
 from rest_framework import serializers
+# import requests
 from .models import Gabarito, Prova, Aluno, Situacao
 
 
