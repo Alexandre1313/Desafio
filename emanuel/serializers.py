@@ -32,22 +32,26 @@ class GabaritoSerializer(serializers.ModelSerializer):
                   # 'peso_da_questao_4',
                   'criacao')
 
-    def validate_resposta_da_questao_1(self, valor):
+    @staticmethod
+    def validate_resposta_da_questao_1(valor):
         if valor in 'AaBbCc':
             return valor
         raise serializers.ValidationError('A resposta só pode ser A, B ou C')
 
-    def validate_resposta_da_questao_2(self, valor):
+    @staticmethod
+    def validate_resposta_da_questao_2(valor):
         if valor in 'AaBbCc':
             return valor
         raise serializers.ValidationError('A resposta só pode ser A, B ou C')
 
-    def validate_resposta_da_questao_3(self, valor):
+    @staticmethod
+    def validate_resposta_da_questao_3(valor):
         if valor in 'AaBbCc':
             return valor
         raise serializers.ValidationError('A resposta só pode ser A, B ou C')
 
-    def validate_resposta_da_questao_4(self, valor):
+    @staticmethod
+    def validate_resposta_da_questao_4(valor):
         if valor in 'AaBbCc':
             return valor
         raise serializers.ValidationError('A resposta só pode ser A, B ou C')
@@ -101,22 +105,26 @@ class ProvaSerializer(serializers.ModelSerializer):
                   'resposta_do_aluno_questao_4',
                   )
 
-    def validate_resposta_do_aluno_questao_1(self, valor):
+    @staticmethod
+    def validate_resposta_do_aluno_questao_1(valor):
         if valor in 'AaBbCc':
             return valor
         raise serializers.ValidationError('A resposta só pode ser A, B ou C')
 
-    def validate_resposta_do_aluno_questao_2(self, valor):
+    @staticmethod
+    def validate_resposta_do_aluno_questao_2(valor):
         if valor in 'AaBbCc':
             return valor
         raise serializers.ValidationError('A resposta só pode ser A, B ou C')
 
-    def validate_resposta_do_aluno_questao_3(self, valor):
+    @staticmethod
+    def validate_resposta_do_aluno_questao_3(valor):
         if valor in 'AaBbCc':
             return valor
         raise serializers.ValidationError('A resposta só pode ser A, B ou C')
 
-    def validate_resposta_do_aluno_questao_4(self, valor):
+    @staticmethod
+    def validate_resposta_do_aluno_questao_4(valor):
         if valor in 'AaBbCc':
             return valor
         raise serializers.ValidationError('A resposta só pode ser A, B ou C')
