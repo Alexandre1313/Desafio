@@ -8,7 +8,7 @@ from .serializers import GabaritoSerializer, ProvaSerializerGab, \
     AlunoSerializer, SituacaoSerializer, ProvaSerializer
 
 
-# API v1
+# API v1 versão 1
 
 
 class GabaritosAPIView(generics.ListCreateAPIView):
@@ -51,7 +51,7 @@ class SituacaoAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SituacaoSerializer
 
 
-# API v2
+# API v2 versão 2
 
 
 class GabaritosViewSet(viewsets.ModelViewSet):
